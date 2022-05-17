@@ -41,6 +41,7 @@
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/blue</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/blue</item>
     </style>
 
 </resources>

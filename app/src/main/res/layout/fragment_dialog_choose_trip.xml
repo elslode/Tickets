@@ -13,7 +13,7 @@
         android:id="@+id/constraintParent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/green">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/laberFlyClass"
@@ -83,6 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/choose"
+            android:layout_marginBottom="10dp"
             style="@style/AppTheme.Button"
             app:layout_constraintEnd_toEndOf="@+id/constraintParent"
             app:layout_constraintStart_toStartOf="@+id/constraintParent"

@@ -13,7 +13,7 @@ import com.elslode.onetwotrip.utils.Extension.currencyType
 import com.elslode.onetwotrip.utils.Extension.price
 import com.elslode.onetwotrip.utils.Extension.transfer
 
-class RecyclerAdapter: ListAdapter<TripResponse, TripViewHolder>(TripDiffCallback) {
+class TripAdapter: ListAdapter<TripResponse, TripViewHolder>(TripDiffCallback) {
 
     var onTripItemClickListener: ((TripResponse) -> Unit)? = null
 

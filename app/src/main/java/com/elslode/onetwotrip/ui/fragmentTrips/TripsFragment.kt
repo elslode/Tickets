@@ -1,20 +1,16 @@
 package com.elslode.onetwotrip.ui.fragmentTrips
 
-import android.app.ProgressDialog.show
 import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.elslode.onetwotrip.OneTripApp
-import com.elslode.onetwotrip.R
 import com.elslode.onetwotrip.databinding.FragmentTripsBinding
 import com.elslode.onetwotrip.ui.ViewModelFactory
-import com.elslode.onetwotrip.ui.adapter.RecyclerAdapter
+import com.elslode.onetwotrip.ui.adapter.TripAdapter
 import com.elslode.onetwotrip.ui.fragmentChooseClassFly.TripChooseDialogFragment
 import javax.inject.Inject
 
@@ -34,7 +30,7 @@ class TripsFragment : Fragment() {
     }
 
     private val adapter by lazy {
-        RecyclerAdapter()
+        TripAdapter()
     }
 
     override fun onAttach(context: Context) {
