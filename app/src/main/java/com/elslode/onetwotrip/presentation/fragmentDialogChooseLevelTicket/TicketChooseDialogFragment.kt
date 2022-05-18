@@ -1,4 +1,4 @@
-package com.elslode.onetwotrip.ui.fragmentChooseClassFly
+package com.elslode.onetwotrip.presentation.fragmentDialogChooseLevelTicket
 
 import android.content.Context
 import android.os.Bundle
@@ -13,15 +13,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.elslode.onetwotrip.OneTripApp
 import com.elslode.onetwotrip.R
 import com.elslode.onetwotrip.databinding.FragmentDialogChooseTripBinding
-import com.elslode.onetwotrip.domain.TripResponse
-import com.elslode.onetwotrip.ui.ViewModelFactory
-import com.elslode.onetwotrip.ui.detailFragment.DetailFragment
-import com.elslode.onetwotrip.ui.detailFragment.DetailViewModel
+import com.elslode.onetwotrip.presentation.ViewModelFactory
+import com.elslode.onetwotrip.presentation.detailFragment.DetailFragment
 import com.elslode.onetwotrip.utils.Constant.BUSSINESS
 import com.elslode.onetwotrip.utils.Constant.ECONOM
 import javax.inject.Inject
 
-class TripChooseDialogFragment : DialogFragment() {
+class TicketChooseDialogFragment : DialogFragment() {
 
     private var _binding: FragmentDialogChooseTripBinding? = null
     private val binding: FragmentDialogChooseTripBinding
@@ -35,12 +33,12 @@ class TripChooseDialogFragment : DialogFragment() {
         (requireActivity().application as OneTripApp).component
     }
 
-    private var trip: TripResponse? = null
+    private var ticketId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            trip = it.getParcelable(TRIP_KEY)
+            ticketId = it.getInt(TICKET_KEY)
         }
     }
 
@@ -59,36 +57,41 @@ class TripChooseDialogFragment : DialogFragment() {
         window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         mViewModel = ViewModelProvider(this, viewModelFactory)[ViewModelDialog::class.java]
-        mViewModel.tripAvailablePrice(trip?.prices)
+        mViewModel.getItem(ticketId)
 
-        mViewModel.checkBoxBussinessVisible.observe(viewLifecycleOwner) {
-            binding.checkBoxBusiness.isVisible = it
-            binding.priceBusiness.isVisible = it
-        }
-
-        mViewModel.checkBoxEconomyVisible.observe(viewLifecycleOwner) {
-            binding.checkBoxEconomy.isVisible = it
-            binding.priceEconomy.isVisible = it
-        }
-
-        mViewModel.buttonEnabledVisible.observe(viewLifecycleOwner) {
-            binding.enableChooseTypeTicketButton.isVisible = it
-        }
-
-        mViewModel.priceBussiness.observe(viewLifecycleOwner) {
-            binding.priceBusiness.text = it
-        }
-
-        mViewModel.priceEconomy.observe(viewLifecycleOwner) {
-            binding.priceEconomy.text = it
-        }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mViewModel.stateDialog.observe(viewLifecycleOwner) {
+
+            when (it) {
+                is VisibilityBoxBusiness -> {
+                    binding.checkBoxBusiness.isVisible = true
+                    binding.priceBusiness.isVisible = true
+                }
+                is VisibilityBoxEconomy -> {
+                    binding.checkBoxEconomy.isVisible = true
+                    binding.priceEconomy.isVisible = true
+                }
+                is VisibilityButtonEnabled -> {
+                    binding.enableChooseTypeTicketButton.isVisible = true
+                }
+                is PriceBusiness -> {
+                    binding.priceBusiness.text = it.price
+                }
+                is PriceEconomy -> {
+                    binding.priceEconomy.text = it.price
+                }
+            }
+        }
     }
 
     private fun fragmentTransaction(fragment: Fragment) {
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
+            .addToBackStack(this.toString())
             .commit()
     }
 
@@ -104,33 +107,27 @@ class TripChooseDialogFragment : DialogFragment() {
                 binding.checkBoxEconomy.isChecked = false
             }
         }
-
         binding.enableChooseTypeTicketButton.setOnClickListener {
-            binding.apply {
-                when (true) {
-                    checkBoxBusiness.isChecked -> {
-                        fragmentTransaction(DetailFragment.newInstance(BUSSINESS, trip))
-                        dialog?.hide()
-                    }
-                    checkBoxEconomy.isChecked -> {
-                        fragmentTransaction(DetailFragment.newInstance(ECONOM, trip))
-                        dialog?.dismiss()
-                    }
-                }
+            if (binding.checkBoxBusiness.isChecked) {
+                fragmentTransaction(DetailFragment.newInstance(BUSSINESS, ticketId))
             }
+            if (binding.checkBoxEconomy.isChecked) {
+                fragmentTransaction(DetailFragment.newInstance(ECONOM, ticketId))
+            }
+            dialog?.cancel()
         }
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(trip: TripResponse) =
-            TripChooseDialogFragment().apply {
+        fun newInstance(idTicket: Int) =
+            TicketChooseDialogFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable(TRIP_KEY, trip)
+                    putInt(TICKET_KEY, idTicket)
                 }
             }
 
-        private const val TRIP_KEY = "TRIP"
+        private const val TICKET_KEY = "ticketId"
     }
 
 

@@ -1,28 +1,23 @@
 package com.elslode.onetwotrip.data.repository
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.elslode.onetwotrip.data.database.TicketsDao
-import com.elslode.onetwotrip.data.database.TripsResponseDbModel
 import com.elslode.onetwotrip.data.mapper.MapperDbToDomain
 import com.elslode.onetwotrip.data.mapper.MapperDtoToDb
 import com.elslode.onetwotrip.data.network.ApiService
-import com.elslode.onetwotrip.domain.TicketsRepository
-import com.elslode.onetwotrip.domain.TripResponse
+import com.elslode.onetwotrip.domain.TicketRepository
+import com.elslode.onetwotrip.domain.Ticket
 import javax.inject.Inject
 
-class TicketsRepositoryImpl @Inject constructor(
-    private val application: Application,
+class TicketRepositoryImpl @Inject constructor(
     private val dao: TicketsDao,
     private val apiService: ApiService,
     private val mapperDbToDomain: MapperDbToDomain,
     private val mapperDtoToDb: MapperDtoToDb
-) : TicketsRepository {
+) : TicketRepository {
 
-    private var autoIncrementId = 0
-
-    override fun getTicketsFromDb(): LiveData<List<TripResponse>> {
+    override fun getTicketsFromDb(): LiveData<List<Ticket>> {
         return Transformations.map(dao.getTicketList()) { listTrips ->
             listTrips.map {
                 mapperDbToDomain.mapResponseTripDbToResponseTrip(it)
@@ -34,17 +29,12 @@ class TicketsRepositoryImpl @Inject constructor(
         val trips = apiService.getTrips()
         trips.let {
             mapperDtoToDb.mapResponseTripDtoToResponseDb(it).let { listDbModel ->
-                for (i in listDbModel) {
-                    if (i.id != TripsResponseDbModel.UNDEFINED_ID) {
-                        i.id = autoIncrementId++
-                        dao.saveTicketsList(i)
-                    }
-                }
+                dao.saveTicketsList(listDbModel)
             }
         }
     }
 
-    override suspend fun getItemTrip(id: Int): TripResponse {
+    override suspend fun getItemTrip(id: Int): Ticket {
         val dbItem = dao.getTripItem(id)
         return mapperDbToDomain.mapResponseTripDbToResponseTrip(dbItem)
     }

@@ -1,4 +1,4 @@
-package com.elslode.airtickets.ui.adapter
+package com.elslode.onetwotrip.presentation.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.elslode.onetwotrip.databinding.ItemTripBinding

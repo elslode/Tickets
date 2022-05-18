@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:elevation="40dp"
     app:cardCornerRadius="10dp"
-    tools:context=".ui.fragmentTrips.TripsFragment">
+    tools:context=".presentation.fragmentTickets.TripsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintParent"

@@ -1,17 +1,19 @@
-package com.elslode.onetwotrip.ui.fragmentTrips
+package com.elslode.onetwotrip.presentation.fragmentTickets
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.elslode.onetwotrip.OneTripApp
+import com.elslode.onetwotrip.R
 import com.elslode.onetwotrip.databinding.FragmentTripsBinding
-import com.elslode.onetwotrip.ui.ViewModelFactory
-import com.elslode.onetwotrip.ui.adapter.TripAdapter
-import com.elslode.onetwotrip.ui.fragmentChooseClassFly.TripChooseDialogFragment
+import com.elslode.onetwotrip.presentation.ViewModelFactory
+import com.elslode.onetwotrip.presentation.adapter.TripAdapter
+import com.elslode.onetwotrip.presentation.fragmentDialogChooseLevelTicket.TicketChooseDialogFragment
 import javax.inject.Inject
 
 
@@ -44,20 +46,24 @@ class TripsFragment : Fragment() {
     ): View {
         _binding = FragmentTripsBinding.inflate(inflater, container, false)
         mViewModel = ViewModelProvider(this, viewModelFactory)[ViewModelTrips::class.java]
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewTrip.adapter = adapter
         adapter.onTripItemClickListener = { trip ->
-            mViewModel.getTripItem(trip.id)
-            TripChooseDialogFragment.newInstance(trip).show(
-                parentFragmentManager,
-                "DialogTripDetail"
-            )
+            mViewModel.getTicketItem(trip.id)
+            TicketChooseDialogFragment.newInstance(trip.id).show(parentFragmentManager, null)
         }
 
         mViewModel.listTrips.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
-
-        return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity?.viewModelStore?.clear()
+    }
 }

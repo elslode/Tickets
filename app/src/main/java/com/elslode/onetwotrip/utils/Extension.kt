@@ -2,12 +2,13 @@ package com.elslode.onetwotrip.utils
 
 import com.elslode.onetwotrip.domain.Price
 import com.elslode.onetwotrip.domain.Trip
-import com.elslode.onetwotrip.utils.Constant.DOLLAR
 import com.elslode.onetwotrip.utils.Constant.ECONOM
-import com.elslode.onetwotrip.utils.Constant.EURO
-import com.elslode.onetwotrip.utils.Constant.RUBLE
 
 object Extension {
+
+    private const val RUBLE = "RUB"
+    private const val DOLLAR = "USD"
+    private const val EURO = "EUR"
 
     fun String.currencyType(): String =
         when (this) {
@@ -56,7 +57,7 @@ object Extension {
         }
 
     fun String?.airportDestination() =
-        when(this) {
+        when (this) {
             "SVO" -> "Sheremetyevo"
             "HND" -> "Haneda Airport"
             "NRT" -> "Narita International Airport"

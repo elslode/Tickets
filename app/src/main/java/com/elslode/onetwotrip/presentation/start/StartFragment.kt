@@ -1,4 +1,4 @@
-package com.elslode.onetwotrip.ui.start
+package com.elslode.onetwotrip.presentation.start
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.elslode.onetwotrip.R
 import com.elslode.onetwotrip.databinding.FragmentStartBinding
-import com.elslode.onetwotrip.ui.fragmentTrips.TripsFragment
+import com.elslode.onetwotrip.presentation.fragmentTickets.TripsFragment
 
 
 class StartFragment : Fragment() {
@@ -21,6 +21,11 @@ class StartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
        _binding = FragmentStartBinding.inflate(inflater, container, false)
+        return (binding.root)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.nextButton.setOnClickListener {
             requireActivity().supportFragmentManager
                 .beginTransaction()
@@ -28,6 +33,5 @@ class StartFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-        return (binding.root)
     }
 }

@@ -2,19 +2,16 @@ package com.elslode.onetwotrip.data.mapper
 
 import com.elslode.onetwotrip.data.database.PriceDbModel
 import com.elslode.onetwotrip.data.database.TripDbModel
-import com.elslode.onetwotrip.data.database.TripsResponseDbModel
-import com.elslode.onetwotrip.data.network.PriceDto
-import com.elslode.onetwotrip.data.network.TripDto
-import com.elslode.onetwotrip.data.network.TripResponseDto
+import com.elslode.onetwotrip.data.database.TicketEntityDbModel
 import com.elslode.onetwotrip.domain.Price
 import com.elslode.onetwotrip.domain.Trip
-import com.elslode.onetwotrip.domain.TripResponse
+import com.elslode.onetwotrip.domain.Ticket
 import javax.inject.Inject
 
 class MapperDbToDomain @Inject constructor() {
 
-    fun mapResponseTripDbToResponseTrip(response: TripsResponseDbModel) =
-        TripResponse(
+    fun mapResponseTripDbToResponseTrip(response: TicketEntityDbModel) =
+        Ticket(
             id = response.id,
             currency = response.currency,
             prices = mapPriceDbToPrice(response.prices),

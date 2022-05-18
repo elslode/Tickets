@@ -1,4 +1,4 @@
-package com.elslode.onetwotrip.ui.fragmentTrips
+package com.elslode.onetwotrip.presentation.fragmentTickets
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,10 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.elslode.onetwotrip.domain.GetTripItemUseCase
 import com.elslode.onetwotrip.domain.GetTripsListUseCase
 import com.elslode.onetwotrip.domain.LoadTripsUseCase
-import com.elslode.onetwotrip.domain.TripResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.elslode.onetwotrip.domain.Ticket
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class ViewModelTrips @Inject constructor(
@@ -21,20 +19,27 @@ class ViewModelTrips @Inject constructor(
 
     val listTrips = getTicketsUseCase()
 
-    private val _tripItem = MutableLiveData<TripResponse>()
-    val tripItem: LiveData<TripResponse>
+    private val _tripItem = MutableLiveData<Ticket>()
+    val tripItem: LiveData<Ticket>
         get() = _tripItem
 
+    private val jobGetListTickets = CoroutineScope(Dispatchers.IO)
+
     init {
-        CoroutineScope(Dispatchers.IO).launch {
+        jobGetListTickets.launch {
             loadTripsUseCase()
         }
     }
 
-    fun getTripItem(tripId: Int){
+    fun getTicketItem(id: Int){
         viewModelScope.launch {
-            val item = getTripItemUseCase.getItemTrip(tripId)
+            val item = getTripItemUseCase.getItemTrip(id)
             _tripItem.value = item
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        jobGetListTickets.cancel()
     }
 }

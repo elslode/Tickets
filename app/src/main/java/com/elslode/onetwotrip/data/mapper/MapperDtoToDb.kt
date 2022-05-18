@@ -2,7 +2,7 @@ package com.elslode.onetwotrip.data.mapper
 
 import com.elslode.onetwotrip.data.database.PriceDbModel
 import com.elslode.onetwotrip.data.database.TripDbModel
-import com.elslode.onetwotrip.data.database.TripsResponseDbModel
+import com.elslode.onetwotrip.data.database.TicketEntityDbModel
 import com.elslode.onetwotrip.data.network.PriceDto
 import com.elslode.onetwotrip.data.network.TripDto
 import com.elslode.onetwotrip.data.network.TripResponseDto
@@ -12,7 +12,7 @@ class MapperDtoToDb @Inject constructor() {
 
     fun mapResponseTripDtoToResponseDb(response: List<TripResponseDto>) =
         response.map {
-            TripsResponseDbModel(
+            TicketEntityDbModel(
                 id = it.id,
                 currency = it.currency,
                 prices = mapPriceDtoToPriceDb(it.prices),

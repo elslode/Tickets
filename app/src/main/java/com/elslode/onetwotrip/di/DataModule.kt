@@ -5,8 +5,8 @@ import com.elslode.onetwotrip.data.database.AppDatabase
 import com.elslode.onetwotrip.data.database.TicketsDao
 import com.elslode.onetwotrip.data.network.ApiFactory
 import com.elslode.onetwotrip.data.network.ApiService
-import com.elslode.onetwotrip.data.repository.TicketsRepositoryImpl
-import com.elslode.onetwotrip.domain.TicketsRepository
+import com.elslode.onetwotrip.data.repository.TicketRepositoryImpl
+import com.elslode.onetwotrip.domain.TicketRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -15,7 +15,7 @@ import dagger.Provides
 interface DataModule {
 
     @Binds
-    fun bindsRepository(impl: TicketsRepositoryImpl): TicketsRepository
+    fun bindsRepository(impl: TicketRepositoryImpl): TicketRepository
 
     companion object {
 

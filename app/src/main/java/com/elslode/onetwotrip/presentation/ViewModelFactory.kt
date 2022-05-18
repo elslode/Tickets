@@ -1,4 +1,4 @@
-package com.elslode.onetwotrip.ui
+package com.elslode.onetwotrip.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
