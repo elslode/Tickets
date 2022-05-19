@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elslode.onetwotrip.domain.GetTripItemUseCase
 import com.elslode.onetwotrip.domain.Ticket
-import com.elslode.onetwotrip.utils.Constant
+import com.elslode.onetwotrip.domain.TypeOfTicket
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,11 +27,11 @@ class ViewModelDialog @Inject constructor(
             item.prices.apply {
                 this.map {
                     when (it.type) {
-                        Constant.ECONOM -> {
+                        TypeOfTicket.ECONOM.ticketType -> {
                             _stateDialog.value = VisibilityBoxEconomy
                             _stateDialog.value = PriceEconomy(it.amount.toString())
                         }
-                        Constant.BUSSINESS -> {
+                        TypeOfTicket.BUSSINESS.ticketType -> {
                             _stateDialog.value = VisibilityBoxBusiness
                             _stateDialog.value = PriceBusiness(it.amount.toString())
                         }
@@ -43,5 +43,4 @@ class ViewModelDialog @Inject constructor(
             }
         }
     }
-
 }

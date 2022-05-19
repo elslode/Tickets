@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.elslode.onetwotrip.databinding.ItemTripBinding
 import com.elslode.onetwotrip.domain.Ticket
-import com.elslode.onetwotrip.utils.Extension.airportDestination
-import com.elslode.onetwotrip.utils.Extension.currencyType
-import com.elslode.onetwotrip.utils.Extension.price
-import com.elslode.onetwotrip.utils.Extension.transfer
+import com.elslode.onetwotrip.presentation.Extension.airportDestination
+import com.elslode.onetwotrip.presentation.Extension.currencyType
+import com.elslode.onetwotrip.presentation.Extension.price
+import com.elslode.onetwotrip.presentation.Extension.transfer
 
 class TripAdapter: ListAdapter<Ticket, TripViewHolder>(TripDiffCallback) {
 

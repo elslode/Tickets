@@ -1,8 +1,8 @@
-package com.elslode.onetwotrip.utils
+package com.elslode.onetwotrip.presentation
 
 import com.elslode.onetwotrip.domain.Price
 import com.elslode.onetwotrip.domain.Trip
-import com.elslode.onetwotrip.utils.Constant.ECONOM
+import com.elslode.onetwotrip.domain.TypeOfTicket
 
 object Extension {
 
@@ -23,7 +23,7 @@ object Extension {
     fun List<Price>.price(): String {
         var value = ""
         for (i in this) {
-            value = if (i.type == ECONOM) {
+            value = if (i.type == TypeOfTicket.ECONOM.ticketType) {
                 i.amount.toString()
             } else {
                 i.amount.toString()

@@ -13,10 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.elslode.onetwotrip.OneTripApp
 import com.elslode.onetwotrip.R
 import com.elslode.onetwotrip.databinding.FragmentDialogChooseTripBinding
+import com.elslode.onetwotrip.domain.TypeOfTicket
 import com.elslode.onetwotrip.presentation.ViewModelFactory
 import com.elslode.onetwotrip.presentation.detailFragment.DetailFragment
-import com.elslode.onetwotrip.utils.Constant.BUSSINESS
-import com.elslode.onetwotrip.utils.Constant.ECONOM
 import javax.inject.Inject
 
 class TicketChooseDialogFragment : DialogFragment() {
@@ -109,10 +108,10 @@ class TicketChooseDialogFragment : DialogFragment() {
         }
         binding.enableChooseTypeTicketButton.setOnClickListener {
             if (binding.checkBoxBusiness.isChecked) {
-                fragmentTransaction(DetailFragment.newInstance(BUSSINESS, ticketId))
+                fragmentTransaction(DetailFragment.newInstance(TypeOfTicket.BUSSINESS.ticketType, ticketId))
             }
             if (binding.checkBoxEconomy.isChecked) {
-                fragmentTransaction(DetailFragment.newInstance(ECONOM, ticketId))
+                fragmentTransaction(DetailFragment.newInstance(TypeOfTicket.ECONOM.ticketType, ticketId))
             }
             dialog?.cancel()
         }

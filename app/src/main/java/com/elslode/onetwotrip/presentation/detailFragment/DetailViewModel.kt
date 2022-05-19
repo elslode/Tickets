@@ -4,14 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.elslode.onetwotrip.data.database.TicketEntityDbModel
 import com.elslode.onetwotrip.domain.GetTripItemUseCase
-import com.elslode.onetwotrip.domain.Ticket
-import com.elslode.onetwotrip.utils.Constant.BUSSINESS
-import com.elslode.onetwotrip.utils.Constant.ECONOM
-import com.elslode.onetwotrip.utils.Extension.airportDestination
-import com.elslode.onetwotrip.utils.Extension.codeDestination
-import com.elslode.onetwotrip.utils.Extension.currencyType
+import com.elslode.onetwotrip.domain.TypeOfTicket
+import com.elslode.onetwotrip.presentation.Extension.airportDestination
+import com.elslode.onetwotrip.presentation.Extension.codeDestination
+import com.elslode.onetwotrip.presentation.Extension.currencyType
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,7 +24,7 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             val ticket = getTripItemUseCase.getItemTrip(ticketId)
             when (typeTicket) {
-                ECONOM -> {
+                TypeOfTicket.ECONOM.ticketType -> {
                     _stateDetail.value =
                         NameOfAirportOne(ticket.trips.first().from.airportDestination())
                     _stateDetail.value =
@@ -37,7 +34,7 @@ class DetailViewModel @Inject constructor(
                     _stateDetail.value =
                         NameOfAirportFour(ticket.trips.last().to.airportDestination())
                     ticket.prices.map {
-                        if (it.type == ECONOM) {
+                        if (it.type == TypeOfTicket.ECONOM.ticketType) {
                             _stateDetail.value =
                                 Price(it.amount.toString() + ticket.currency.currencyType())
                             _stateDetail.value = TicketType(it.type)
@@ -51,7 +48,7 @@ class DetailViewModel @Inject constructor(
                     _stateDetail.value = CityFrom(ticket.trips.first().from.codeDestination())
                     _stateDetail.value = CityTo(ticket.trips.last().to.codeDestination())
                 }
-                BUSSINESS -> {
+                TypeOfTicket.BUSSINESS.ticketType -> {
                     _stateDetail.value =
                         NameOfAirportOne(ticket.trips.first().from.airportDestination())
                     _stateDetail.value =
@@ -61,7 +58,7 @@ class DetailViewModel @Inject constructor(
                     _stateDetail.value =
                         NameOfAirportFour(ticket.trips.last().to.airportDestination())
                     ticket.prices.map {
-                        if (it.type == BUSSINESS) {
+                        if (it.type == TypeOfTicket.BUSSINESS.ticketType) {
                             _stateDetail.value =
                                 Price(it.amount.toString() + ticket.currency.currencyType())
                             _stateDetail.value = TicketType(it.type)

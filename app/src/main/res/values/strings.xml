@@ -10,4 +10,15 @@
     <string name="choose">выбрать</string>
     <string name="arrow"> -> </string>
     <string name="enabled_class">Выбранный класс:</string>
+
+    <string name="sheremetyevo">Sheremetyevo</string>
+    <string name="haneda">Haneda Airport</string>
+    <string name="narita">Narita International Airport</string>
+    <string name="newark">Newark Liberty International</string>
+    <string name="domodedovo">Domodedovo</string>
+    <string name="doha">Doha</string>
+    <string name="john_f_kennedy">John F Kennedy International</string>
+    <string name="heathrow">Heathrow</string>
+    <string name="frankfurt">Frankfurt International Airport</string>
+
 </resources>
