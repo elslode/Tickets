@@ -5,8 +5,8 @@ sealed class StateDialog
 object VisibilityBoxEconomy: StateDialog()
 object VisibilityBoxBusiness: StateDialog()
 object VisibilityButtonEnabled: StateDialog()
-class PriceEconomy(val price: String): StateDialog()
-class PriceBusiness(val price: String) : StateDialog()
+data class PriceEconomy(val price: String): StateDialog()
+data class PriceBusiness(val price: String) : StateDialog()
 
 
 

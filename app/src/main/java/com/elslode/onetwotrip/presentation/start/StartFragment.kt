@@ -29,7 +29,7 @@ class StartFragment : Fragment() {
         binding.nextButton.setOnClickListener {
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, TripsFragment())
+                .replace(R.id.fragment_container, TripsFragment.newInstance())
                 .addToBackStack(null)
                 .commit()
         }

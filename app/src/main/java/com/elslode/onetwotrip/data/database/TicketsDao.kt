@@ -1,6 +1,5 @@
 package com.elslode.onetwotrip.data.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -9,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface TicketsDao {
     @Query("SELECT * FROM trips_table")
-    fun getTicketList(): LiveData<List<TicketEntityDbModel>>
+    fun getTicketList(): List<TicketEntityDbModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveTicketsList(trips: List<TicketEntityDbModel>)

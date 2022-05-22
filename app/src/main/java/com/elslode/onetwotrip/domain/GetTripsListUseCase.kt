@@ -5,5 +5,5 @@ import javax.inject.Inject
 class GetTripsListUseCase @Inject constructor(
     private val repository: TicketRepository
 ) {
-    operator fun invoke() = repository.getTicketsFromDb()
+    operator fun invoke() = repository.getTickets()
 }

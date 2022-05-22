@@ -1,7 +1,6 @@
 package com.elslode.onetwotrip.data.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.elslode.onetwotrip.data.database.TicketsDao
 import com.elslode.onetwotrip.data.mapper.MapperDbToDomain
 import com.elslode.onetwotrip.data.mapper.MapperDtoToDb
@@ -17,11 +16,10 @@ class TicketRepositoryImpl @Inject constructor(
     private val mapperDtoToDb: MapperDtoToDb
 ) : TicketRepository {
 
-    override fun getTicketsFromDb(): LiveData<List<Ticket>> {
-        return Transformations.map(dao.getTicketList()) { listTrips ->
-            listTrips.map {
-                mapperDbToDomain.mapResponseTripDbToResponseTrip(it)
-            }
+    override fun getTickets(): List<Ticket> {
+        val listTicket = dao.getTicketList()
+        return listTicket.map {
+            mapperDbToDomain.mapTripDbToEntityTrip(it)
         }
     }
 
@@ -36,7 +34,7 @@ class TicketRepositoryImpl @Inject constructor(
 
     override suspend fun getItemTrip(id: Int): Ticket {
         val dbItem = dao.getTripItem(id)
-        return mapperDbToDomain.mapResponseTripDbToResponseTrip(dbItem)
+        return mapperDbToDomain.mapTripDbToEntityTrip(dbItem)
     }
 
     companion object {

@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class MapperDbToDomain @Inject constructor() {
 
-    fun mapResponseTripDbToResponseTrip(response: TicketEntityDbModel) =
+    fun mapTripDbToEntityTrip(response: TicketEntityDbModel) =
         Ticket(
             id = response.id,
             currency = response.currency,

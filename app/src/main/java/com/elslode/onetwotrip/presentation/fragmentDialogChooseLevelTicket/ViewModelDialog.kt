@@ -24,23 +24,22 @@ class ViewModelDialog @Inject constructor(
         viewModelScope.launch {
             val item = getTicketItemUseCase.getItemTrip(id)
             itemTicket = item
-            item.prices.apply {
-                this.map {
-                    when (it.type) {
-                        TypeOfTicket.ECONOM.ticketType -> {
-                            _stateDialog.value = VisibilityBoxEconomy
-                            _stateDialog.value = PriceEconomy(it.amount.toString())
-                        }
-                        TypeOfTicket.BUSSINESS.ticketType -> {
-                            _stateDialog.value = VisibilityBoxBusiness
-                            _stateDialog.value = PriceBusiness(it.amount.toString())
-                        }
-                        else -> {
-                            _stateDialog.value = VisibilityButtonEnabled
-                        }
+            item.prices.map {
+                when (it.type) {
+                    TypeOfTicket.ECONOM.ticketType -> {
+                        _stateDialog.value = VisibilityBoxEconomy
+                        _stateDialog.value = PriceEconomy(it.amount.toString())
+                    }
+                    TypeOfTicket.BUSSINESS.ticketType -> {
+                        _stateDialog.value = VisibilityBoxBusiness
+                        _stateDialog.value = PriceBusiness(it.amount.toString())
+                    }
+                    else -> {
+                        _stateDialog.value = VisibilityButtonEnabled
                     }
                 }
             }
         }
     }
+
 }

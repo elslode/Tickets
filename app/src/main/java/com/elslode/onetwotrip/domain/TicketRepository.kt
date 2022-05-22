@@ -2,9 +2,10 @@ package com.elslode.onetwotrip.domain
 
 import androidx.lifecycle.LiveData
 
+
 interface TicketRepository {
 
-    fun getTicketsFromDb(): LiveData<List<Ticket>>
+    fun getTickets(): List<Ticket>
 
     suspend fun loadTrips()
 
