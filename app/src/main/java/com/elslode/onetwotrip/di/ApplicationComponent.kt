@@ -1,10 +1,9 @@
 package com.elslode.onetwotrip.di
 
 import android.app.Application
-import com.elslode.onetwotrip.MainActivity
-import com.elslode.onetwotrip.ui.detailFragment.DetailFragment
-import com.elslode.onetwotrip.ui.fragmentChooseClassFly.TripChooseDialogFragment
-import com.elslode.onetwotrip.ui.fragmentTrips.TripsFragment
+import com.elslode.onetwotrip.presentation.detailFragment.DetailFragment
+import com.elslode.onetwotrip.presentation.fragmentDialogChooseLevelTicket.TicketChooseDialogFragment
+import com.elslode.onetwotrip.presentation.fragmentTickets.TripsFragment
 import dagger.BindsInstance
 import dagger.Component
 
@@ -18,8 +17,7 @@ import dagger.Component
 
 interface ApplicationComponent {
 
-    fun inject(mainActivity: MainActivity)
-    fun inject(tripDialogFragment: TripChooseDialogFragment)
+    fun inject(ticketDialogFragment: TicketChooseDialogFragment)
     fun inject(tripsFragment: TripsFragment)
     fun inject(detailFragment: DetailFragment)
 

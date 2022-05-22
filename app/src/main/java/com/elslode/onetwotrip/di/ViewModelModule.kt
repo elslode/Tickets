@@ -1,9 +1,9 @@
 package com.elslode.onetwotrip.di
 
 import androidx.lifecycle.ViewModel
-import com.elslode.onetwotrip.ui.detailFragment.DetailViewModel
-import com.elslode.onetwotrip.ui.fragmentChooseClassFly.ViewModelDialog
-import com.elslode.onetwotrip.ui.fragmentTrips.ViewModelTrips
+import com.elslode.onetwotrip.presentation.detailFragment.DetailViewModel
+import com.elslode.onetwotrip.presentation.fragmentDialogChooseLevelTicket.ViewModelDialog
+import com.elslode.onetwotrip.presentation.fragmentTickets.ViewModelTrips
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

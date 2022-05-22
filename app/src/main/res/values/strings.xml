@@ -10,4 +10,46 @@
     <string name="choose">выбрать</string>
     <string name="arrow"> -> </string>
     <string name="enabled_class">Выбранный класс:</string>
+    <string name="error">"Sorry, loading is error"</string>
+    <string name="nullpointexception">"TicketLevel is null or blank"</string>
+
+    <string name="sheremetyevo">Sheremetyevo</string>
+    <string name="haneda">Haneda Airport</string>
+    <string name="narita">Narita International Airport</string>
+    <string name="newark">Newark Liberty International</string>
+    <string name="domodedovo">Domodedovo</string>
+    <string name="doha">Doha</string>
+    <string name="john_f_kennedy">John F Kennedy International</string>
+    <string name="heathrow">Heathrow</string>
+    <string name="frankfurt">Frankfurt International Airport</string>
+
+    <string name="ruble">₽</string>
+    <string name="euro">$</string>
+    <string name="dollar">€</string>
+
+    <string name="svo">SVO</string>
+    <string name="hnd">HND</string>
+    <string name="nrt">NRT</string>
+    <string name="ewr">EWR</string>
+    <string name="dme">DME</string>
+    <string name="doh">DOH</string>
+    <string name="jfk">JFK</string>
+    <string name="lhr">LHR</string>
+    <string name="fra">FRA</string>
+
+    <plurals name="airport">
+        <item quantity="one" formatted="true">%1$d пересадка</item>
+        <item quantity="two" formatted="true">%1$s пересадки</item>
+        <item quantity="zero" formatted="true">%1$s пересадок</item>
+        <item quantity="few" formatted="true">%1$s пересадок</item>
+        <item quantity="many" formatted="true">%1$s пересадок</item>
+        <item quantity="other" formatted="true">без пересадок</item>
+    </plurals>
+    
+    <string name="msk">Москва</string>
+    <string name="tokio">Токио</string>
+    <string name="nyc">Нью-Йорк</string>
+    <string name="doha_city">Доха</string>
+    <string name="london">Лондон</string>
+    <string name="frankf">Франкфурт-на-Майне</string>
 </resources>
